@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -7,17 +8,28 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // ✅ stop page refresh
+
+    if (!form.email || !form.password) {
+      setError('Please enter email and password');
+      return;
+    }
+
     setError('');
     setLoading(true);
+
     try {
       await login(form.email, form.password);
+
+      // ✅ redirect to dashboard
       navigate('/');
     } catch (err) {
+      console.error(err);
       setError(err.response?.data?.error || 'Login failed');
     } finally {
       setLoading(false);
@@ -32,22 +44,32 @@ export default function Login() {
 
         {error && <div className="error-banner">{error}</div>}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <label>Email</label>
           <input
             type="email"
+            name="email"
+            autoComplete="off"
             value={form.email}
-            onChange={e => setForm({ ...form, email: e.target.value })}
+            onChange={(e) =>
+              setForm({ ...form, email: e.target.value })
+            }
             placeholder="admin@mil.gov"
             required
           />
+
           <label>Password</label>
           <input
             type="password"
+            name="password"
+            autoComplete="new-password"
             value={form.password}
-            onChange={e => setForm({ ...form, password: e.target.value })}
+            onChange={(e) =>
+              setForm({ ...form, password: e.target.value })
+            }
             required
           />
+
           <button type="submit" disabled={loading}>
             {loading ? 'Authenticating...' : 'Login'}
           </button>
@@ -63,3 +85,4 @@ export default function Login() {
     </div>
   );
 }
+

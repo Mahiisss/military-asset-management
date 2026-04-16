@@ -19,12 +19,25 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
-    localStorage.setItem('token', data.token);
-    setUser(data.user);
-    return data.user;
-  };
+const login = async (email, password) => {
+  const res = await api.post('/auth/login', { email, password });
+
+  // save token
+  localStorage.setItem('token', res.data.token);
+
+  // set user (if returned)
+  if (res.data.user) {
+    setUser(res.data.user);
+  }
+
+  return res.data;
+};
+
+
+
+
+
+
 
   const logout = () => {
     localStorage.removeItem('token');
