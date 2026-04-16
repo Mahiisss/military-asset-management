@@ -71,24 +71,32 @@ export default function Dashboard() {
   const [loading, setLoading]   = useState(true);
   const [modal, setModal]       = useState(null);
   const [filter, setFilter]     = useState({ base: '', type: '', search: '' });
-
+ // Fetch summary
   useEffect(() => {
     api.get('/assets/summary').then(r => setSummary(r.data));
   }, []);
 
-  useEffect(() => {
-    fetchAssets();
-  }, [filter.base, filter.type]);
-
+  // Fetch assets
   const fetchAssets = async () => {
     setLoading(true);
     const params = {};
     if (filter.base) params.base = filter.base;
     if (filter.type) params.type = filter.type;
+
     const { data } = await api.get('/assets', { params });
     setAssets(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchAssets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter.base, filter.type]);
+
+
+
+
+
 
   const handleRowClick = async (asset) => {
     // Fetch movement details for this asset
