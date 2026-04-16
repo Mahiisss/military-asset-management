@@ -1,0 +1,61 @@
+# =========================
+# Node Modules
+# =========================
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+backend/.env
+frontend/.env
+frontend/.env.production
+
+# =========================
+# Database Files (SQLite)
+# =========================
+*.db
+*.db-shm
+*.db-wal
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Build / Production
+# =========================
+build/
+dist/
+frontend/build/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Vercel
+# =========================
+.vercel
+
+# =========================
+# Misc
+# =========================
+*.tmp
+*.cache
