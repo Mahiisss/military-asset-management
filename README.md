@@ -9,33 +9,33 @@ The system supports real-world logistics workflows including purchases, transfer
 
 KristalBall enables military administrators, base commanders, and logistics officers to efficiently manage assets across locations.
 
-The system provides:
+### Key Capabilities:
 
 * Centralized asset tracking
 * Real-time inventory updates
-* Movement history (purchase → transfer → usage)
+* Complete movement history (purchase → transfer → usage)
 * Secure role-based access
 
 ---
 
 ## 🛠 Tech Stack
 
-**Frontend**
+### Frontend
 
 * React (Functional Components + Hooks)
 * React Router DOM
 * Axios
 
-**Backend**
+### Backend
 
 * Node.js
 * Express.js
 
-**Database**
+### Database
 
 * SQLite (better-sqlite3)
 
-**Authentication**
+### Authentication
 
 * JWT (JSON Web Tokens)
 * bcryptjs
@@ -46,9 +46,9 @@ The system provides:
 
 ### 📊 Dashboard
 
-* Displays total assets by category (vehicles, weapons, ammunition, equipment)
-* Search, filter by base and type
-* Clean UI with real-time updates
+* Displays asset statistics (vehicles, weapons, ammunition, equipment)
+* Filter by base, type, and search
+* Real-time updates
 
 ---
 
@@ -86,7 +86,7 @@ Click any asset to view detailed breakdown:
 * Expended quantity
 * Final Net Balance
 
-This ensures transparency and traceability of all asset movements.
+Ensures full transparency and traceability of all asset movements.
 
 ---
 
@@ -104,16 +104,15 @@ Implemented using JWT authentication and middleware authorization.
 
 ## 🏗 System Architecture
 
+```
 React Frontend → Axios API Calls → Express Backend → SQLite Database
-
-* Frontend handles UI and state
-* Backend manages business logic and security
-* Database stores all asset operations
+```
 
 ---
 
 ## 📂 Project Structure
 
+```
 military-asset-management/
 ├── backend/
 │   ├── db/
@@ -128,7 +127,8 @@ military-asset-management/
 │   └── package.json
 │
 ├── .gitignore
-├── README.md
+└── README.md
+```
 
 ---
 
@@ -136,17 +136,21 @@ military-asset-management/
 
 ### 1. Clone Repository
 
-git clone <your-repo-link>
+```
+git clone https://github.com/Mahiisss/military-asset-management.git
 cd military-asset-management
+```
 
 ---
 
 ### 2. Backend Setup
 
+```
 cd backend
 npm install
-node db/seed.js   (run once)
+node db/seed.js   # run once
 npm run dev
+```
 
 Backend runs at:
 http://localhost:5000
@@ -155,9 +159,11 @@ http://localhost:5000
 
 ### 3. Frontend Setup
 
+```
 cd frontend
 npm install
 npm start
+```
 
 Frontend runs at:
 http://localhost:3000
@@ -176,26 +182,26 @@ http://localhost:3000
 
 ## 🌐 API Endpoints
 
-POST /api/auth/login
-GET /api/assets
-POST /api/purchases
-POST /api/transfers
-POST /api/assignments
-POST /api/expenditures
+* POST `/api/auth/login`
+* GET `/api/assets`
+* POST `/api/purchases`
+* POST `/api/transfers`
+* POST `/api/assignments`
+* POST `/api/expenditures`
 
 ---
 
 ## 📊 Key Functional Logic
 
-Stock Calculation:
+```
+Stock = Purchased 
+      + Transferred In 
+      - Transferred Out 
+      - Assigned 
+      - Expended
+```
 
-Stock = Purchased
-+ Transferred In
-- Transferred Out
-- Assigned
-- Expended
-
-This ensures accurate real-time inventory tracking.
+Ensures accurate real-time inventory tracking.
 
 ---
 
@@ -223,4 +229,8 @@ This ensures accurate real-time inventory tracking.
 * Applied role-based authorization
 * Managed structured data using SQLite
 
+---
 
+## 👨‍💻 Author
+
+Mahi
