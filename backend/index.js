@@ -8,7 +8,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://your-app.vercel.app'
+    'https://military-asset-management-omega.vercel.app'
   ],
   credentials: true
 }));
