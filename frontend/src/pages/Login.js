@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -23,7 +22,7 @@ export default function Login() {
 
     try {
       await login(form.email, form.password);
-      navigate('/'); // redirect to dashboard
+      navigate('/');
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.error || 'Login failed');
@@ -46,9 +45,7 @@ export default function Login() {
             type="email"
             autoComplete="off"
             value={form.email}
-            onChange={(e) =>
-              setForm({ ...form, email: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="admin@mil.gov"
           />
 
@@ -57,9 +54,7 @@ export default function Login() {
             type="password"
             autoComplete="new-password"
             value={form.password}
-            onChange={(e) =>
-              setForm({ ...form, password: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
 
           <button
@@ -81,4 +76,3 @@ export default function Login() {
     </div>
   );
 }
-
