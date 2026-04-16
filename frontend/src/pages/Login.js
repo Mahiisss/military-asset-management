@@ -12,9 +12,7 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // ✅ stop page refresh
-
+  const handleSubmit = async () => {
     if (!form.email || !form.password) {
       setError('Please enter email and password');
       return;
@@ -25,9 +23,7 @@ export default function Login() {
 
     try {
       await login(form.email, form.password);
-
-      // ✅ redirect to dashboard
-      navigate('/');
+      navigate('/'); // redirect to dashboard
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.error || 'Login failed');
@@ -44,36 +40,36 @@ export default function Login() {
 
         {error && <div className="error-banner">{error}</div>}
 
-        <form onSubmit={handleSubmit} autoComplete="off">
+        <div>
           <label>Email</label>
           <input
             type="email"
-            name="email"
             autoComplete="off"
             value={form.email}
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })
             }
             placeholder="admin@mil.gov"
-            required
           />
 
           <label>Password</label>
           <input
             type="password"
-            name="password"
             autoComplete="new-password"
             value={form.password}
             onChange={(e) =>
               setForm({ ...form, password: e.target.value })
             }
-            required
           />
 
-          <button type="submit" disabled={loading}>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
             {loading ? 'Authenticating...' : 'Login'}
           </button>
-        </form>
+        </div>
 
         <div className="demo-creds">
           <p>Demo credentials:</p>
