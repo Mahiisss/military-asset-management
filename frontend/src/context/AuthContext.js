@@ -13,13 +13,22 @@ export function AuthProvider({ children }) {
       setLoading(false);
       return;
     }
-    api.get('/auth/me')
-      .then(res => setUser(res.data))
-      .catch(() => {
+
+    // decode token locally instead of calling /auth/me
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const isExpired = payload.exp * 1000 < Date.now();
+      if (isExpired) {
         localStorage.removeItem('token');
         setUser(null);
-      })
-      .finally(() => setLoading(false));
+      } else {
+        setUser(payload);
+      }
+    } catch {
+      localStorage.removeItem('token');
+      setUser(null);
+    }
+    setLoading(false);
   }, []);
 
   const login = async (email, password) => {
